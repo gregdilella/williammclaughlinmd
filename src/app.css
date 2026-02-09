@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+
+/* ========================================
+   CUSTOM THEME - Dark Slate + Teal
+   ======================================== */
+
+@theme {
+  /* Colors */
+  --color-slate-950: #020617;
+  --color-slate-900: #0f172a;
+  --color-slate-850: #131c31;
+  --color-slate-800: #1e293b;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-500: #64748b;
+  --color-slate-400: #94a3b8;
+  --color-slate-300: #cbd5e1;
+  --color-slate-200: #e2e8f0;
+  --color-slate-100: #f1f5f9;
+
+  --color-teal-600: #0d9488;
+  --color-teal-500: #14b8a6;
+  --color-teal-400: #2dd4bf;
+  --color-teal-300: #5eead4;
+
+  /* Fonts */
+  --font-heading: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Spacing for sidebar */
+  --sidebar-collapsed: 72px;
+  --sidebar-expanded: 240px;
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-slate-900);
+  color: var(--color-slate-100);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* ========================================
+   SCROLLBAR STYLING
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-slate-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-slate-700);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-slate-600);
+}
+
+/* ========================================
+   GLOBAL IMAGE POSITIONING
+   Ensures the top of every image (heads, faces)
+   is always visible when cropping occurs.
+   ======================================== */
+
+img {
+  object-position: top center;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Glow effect for teal buttons/elements */
+.teal-glow {
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.3), 0 0 60px rgba(20, 184, 166, 0.1);
+}
+
+.teal-glow-hover:hover {
+  box-shadow: 0 0 30px rgba(20, 184, 166, 0.4), 0 0 80px rgba(20, 184, 166, 0.15);
+}
+
+/* Glass morphism card */
+.glass-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+/* Image card with rounded + hover */
+.image-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(20, 184, 166, 0.15);
+}
+
+.image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  object-position: top center !important; /* Keep faces/heads visible when cropping */
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-teal-400), var(--color-teal-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Divider line */
+.divider-teal {
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-teal-500), transparent);
+  border-radius: 2px;
+}
+
+/* Animation helpers - elements start hidden, GSAP reveals them */
+.gsap-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.gsap-fade-in {
+  opacity: 0;
+}
+
+.gsap-slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.gsap-slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+}
