@@ -38,13 +38,6 @@
       scrollTrigger: { trigger: '.philosophy-quote', start: 'top 85%', once: true }
     });
 
-    // Gallery
-    ScrollTrigger.batch('.gallery-img', {
-      onEnter: (batch: any) =>
-        gsap.from(batch, { opacity: 0, y: 30, scale: 0.95, duration: 0.5, stagger: 0.1, ease: 'power2.out' }),
-      start: 'top 85%',
-      once: true
-    });
   });
 
   const timeline = [
@@ -186,12 +179,13 @@
               <p class="text-slate-400 leading-relaxed">{item.description}</p>
               {#if item.image}
                 <div class="mt-6">
-                  <div class="max-w-xs rounded-2xl {i % 2 === 0 ? 'lg:ml-auto' : ''}"
-                       role="img" aria-label={item.imageAlt}
-                       style="height: 400px; background-image: url({item.image}); background-size: cover; background-position: top center; transition: transform 0.4s ease, box-shadow 0.4s ease;"
+                  <div class="max-w-xs rounded-2xl overflow-hidden {i % 2 === 0 ? 'lg:ml-auto' : ''}"
+                       style="height: 400px; transition: transform 0.4s ease, box-shadow 0.4s ease;"
                        onmouseenter={(e) => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(20,184,166,0.15)'; }}
                        onmouseleave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'none'; }}
                   >
+                    <img src={item.image} alt={item.imageAlt} loading="lazy"
+                         class="w-full h-full object-cover object-top" />
                   </div>
                 </div>
               {/if}
@@ -225,27 +219,6 @@
           </p>
           <cite class="block mt-4 text-teal-400 text-sm font-semibold not-italic">— Dr. William McLaughlin</cite>
         </blockquote>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="gallery-section py-16">
-  <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-2xl font-bold font-heading text-slate-100 text-center mb-10">On &amp; Off the Field</h2>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="gallery-img image-card aspect-[3/4] rounded-2xl overflow-hidden">
-        <img src="/images/college-hockey.png" alt="NCAA hockey" loading="lazy" class="object-top" />
-      </div>
-      <div class="gallery-img image-card aspect-[3/4] rounded-2xl overflow-hidden">
-        <img src="/images/hockey-family.png" alt="Dr. McLaughlin with family on ice" loading="lazy" class="object-top" />
-      </div>
-      <div class="gallery-img image-card aspect-[3/4] rounded-2xl overflow-hidden">
-        <img src="/images/hockey-duo.png" alt="Hockey with friends" loading="lazy" class="object-top" />
-      </div>
-      <div class="gallery-img image-card aspect-[3/4] rounded-2xl overflow-hidden">
-        <img src="/images/surgeon-cartoon.png" alt="Dr. McLaughlin illustration" loading="lazy" class="object-center" />
       </div>
     </div>
   </div>

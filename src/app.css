@@ -73,16 +73,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ========================================
-   GLOBAL IMAGE POSITIONING
-   Ensures the top of every image (heads, faces)
-   is always visible when cropping occurs.
-   ======================================== */
-
-img {
-  object-position: top center;
-}
-
-/* ========================================
    UTILITY CLASSES
    ======================================== */
 
@@ -118,8 +108,8 @@ img {
 .image-card img {
   width: 100%;
   height: 100%;
-  object-fit: cover !important;
-  object-position: top center !important; /* Keep faces/heads visible when cropping */
+  object-fit: cover;
+  object-position: top center;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
