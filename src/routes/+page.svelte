@@ -3,6 +3,35 @@
   import { bookingUrl, phoneNumber } from '$lib/data/navigation';
   import { Phone, CalendarPlus, Award, BookOpen, Users, Dumbbell, ChevronRight } from 'lucide-svelte';
 
+  // Intro video transition phases:
+  //   'playing'    → video is on top, playing
+  //   'fade-black' → video fades out (1s), revealing solid black beneath it
+  //   'hold-black' → solid black visible for 0.25s
+  //   'fade-in'    → black fades out (0.5s), revealing the headshot beneath it
+  //   'done'       → headshot fully visible
+  let phase: 'playing' | 'fade-black' | 'hold-black' | 'fade-in' | 'done' = $state('playing');
+
+  // Called when the video finishes — kicks off the fade-to-black sequence
+  function handleVideoEnd() {
+    // Phase 1: fade video out to reveal the black layer (1 second)
+    phase = 'fade-black';
+
+    setTimeout(() => {
+      // Phase 2: hold on black (0.25 seconds)
+      phase = 'hold-black';
+
+      setTimeout(() => {
+        // Phase 3: fade black out to reveal the headshot (0.5 seconds)
+        phase = 'fade-in';
+
+        setTimeout(() => {
+          // All done — clean up
+          phase = 'done';
+        }, 500);
+      }, 250); // hold black for 0.25 seconds
+    }, 1000); // matches the 1s video fade-out duration
+  }
+
   // GSAP animation setup — progressive enhancement only
   onMount(async () => {
     await new Promise<void>((resolve) => {
@@ -115,17 +144,37 @@
       </div>
     </div>
 
-    <!-- Hero Image -->
+    <!-- Hero Image / Intro Video -->
     <div class="order-1 lg:order-2 flex justify-center">
       <div class="hero-image relative">
         <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 to-teal-500/5 blur-xl scale-105"></div>
         <div class="image-card relative w-72 sm:w-80 lg:w-96 aspect-[3/4] rounded-3xl">
+          <!-- Layer 1 (bottom): Headshot — always fully visible, just covered by layers above -->
           <img
             src="/images/headshot.png"
             alt="Dr. William McLaughlin - Orthopedic Surgeon"
             class="rounded-3xl"
             loading="eager"
           />
+
+          <!-- Layer 2 (middle): Black overlay — covers the image, fades out to reveal it -->
+          <div
+            class="absolute inset-0 rounded-3xl bg-black pointer-events-none"
+            style="transition: opacity 0.5s ease; opacity: {phase === 'fade-in' || phase === 'done' ? 0 : 1};"
+          ></div>
+
+          <!-- Layer 3 (top): Video — plays on top of everything, fades out to reveal black -->
+          <!-- svelte-ignore a11y_media_has_caption -->
+          <video
+            autoplay
+            muted
+            playsinline
+            onended={handleVideoEnd}
+            class="absolute inset-0 w-full h-full object-cover rounded-3xl"
+            style="transition: opacity 1s ease; opacity: {phase === 'playing' ? 1 : 0}; pointer-events: {phase === 'playing' ? 'auto' : 'none'};"
+          >
+            <source src="/images/hf_20260210_024649_d7f88677-4047-4c7d-9e99-2757f12d901a.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
     </div>
