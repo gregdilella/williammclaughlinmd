@@ -1,0 +1,13 @@
+{
+  // Name of your Cloudflare Workers project
+  "name": "willmclaughlinmd",
+
+  // Required: tells Cloudflare which API version to use
+  "compatibility_date": "2026-02-10",
+
+  // Points to the folder where your static site gets built
+  // This matches the "pages" and "assets" path in svelte.config.js
+  "assets": {
+    "directory": "./build"
+  }
+}

@@ -184,12 +184,12 @@
         </p>
       </div>
       <div class="md:col-span-2">
-        <div class="aspect-[3/4] rounded-2xl overflow-hidden"
+        <div class="rounded-2xl overflow-hidden"
              style="transition: transform 0.4s ease, box-shadow 0.4s ease;"
              onmouseenter={(e) => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(20,184,166,0.15)'; }}
              onmouseleave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'none'; }}
         >
-          <img src="/images/college-hockey.png" alt="Dr. McLaughlin playing NCAA hockey" loading="lazy" class="w-full h-full object-cover object-top" />
+          <img src="/images/hockey-family.png" alt="Dr. McLaughlin with family on the ice" loading="lazy" class="w-full h-auto rounded-2xl" />
         </div>
       </div>
     </div>
@@ -212,12 +212,12 @@
 
     <div class="bio-card grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
       <div class="md:col-span-2 order-2 md:order-1">
-        <div class="aspect-[3/4] rounded-2xl overflow-hidden"
+        <div class="rounded-2xl overflow-hidden"
              style="transition: transform 0.4s ease, box-shadow 0.4s ease;"
              onmouseenter={(e) => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(20,184,166,0.15)'; }}
              onmouseleave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'none'; }}
         >
-          <img src="/images/surgery-action.png" alt="Dr. McLaughlin performing surgery" loading="lazy" class="w-full h-full object-cover object-top" />
+          <img src="/images/surgeon-cartoon.png" alt="Dr. McLaughlin surgeon illustration" loading="lazy" class="w-full h-auto rounded-2xl" />
         </div>
       </div>
       <div class="md:col-span-3 order-1 md:order-2">

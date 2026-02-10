@@ -47,8 +47,8 @@
       title: 'College Hockey Player',
       description:
         'Before pursuing medicine, Dr. McLaughlin competed as an NCAA ice hockey player and earned All-Academic athlete honors. His experience as a competitive athlete gave him a unique understanding of sports injuries from both sides — as a player who has experienced them, and as a surgeon who now treats them.',
-      image: '/images/college-hockey.png',
-      imageAlt: 'Dr. McLaughlin playing NCAA hockey'
+      image: '/images/hockey-family.png',
+      imageAlt: 'Dr. McLaughlin with family on the ice'
     },
     {
       icon: GraduationCap,
@@ -65,8 +65,8 @@
       title: 'Yale University — Chief Resident',
       description:
         'He completed his orthopedic surgical residency at the prestigious Yale University, where his peers and faculty selected him as Chief Resident in his final year of training — a testament to his surgical skill, leadership, and clinical excellence.',
-      image: '/images/surgery-action.png',
-      imageAlt: 'Dr. McLaughlin performing orthopedic surgery'
+      image: '/images/surgeon-cartoon.png',
+      imageAlt: 'Dr. McLaughlin surgeon illustration'
     },
     {
       icon: Stethoscope,
@@ -180,12 +180,12 @@
               {#if item.image}
                 <div class="mt-6">
                   <div class="max-w-xs rounded-2xl overflow-hidden {i % 2 === 0 ? 'lg:ml-auto' : ''}"
-                       style="height: 400px; transition: transform 0.4s ease, box-shadow 0.4s ease;"
+                       style="transition: transform 0.4s ease, box-shadow 0.4s ease;"
                        onmouseenter={(e) => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(20,184,166,0.15)'; }}
                        onmouseleave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'none'; }}
                   >
                     <img src={item.image} alt={item.imageAlt} loading="lazy"
-                         class="w-full h-full object-cover object-top" />
+                         class="w-full h-auto rounded-2xl" />
                   </div>
                 </div>
               {/if}
