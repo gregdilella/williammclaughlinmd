@@ -1,6 +1,6 @@
 {
   // Name of your Cloudflare Workers project
-  "name": "willmclaughlinmd",
+  "name": "williammclaughlinmd",
 
   // Required: tells Cloudflare which API version to use
   "compatibility_date": "2026-02-10",
