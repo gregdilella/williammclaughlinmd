@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { bookingUrl, phoneNumber } from '$lib/data/navigation';
   import { Phone, CalendarPlus, Award, BookOpen, Users, Dumbbell, ChevronRight } from 'lucide-svelte';
 
@@ -32,50 +31,6 @@
     }, 1000); // matches the 1s video fade-out duration
   }
 
-  // GSAP animation setup — progressive enhancement only
-  onMount(async () => {
-    await new Promise<void>((resolve) => {
-      const check = () => {
-        if ((window as any).__gsap) resolve();
-        else setTimeout(check, 50);
-      };
-      check();
-    });
-
-    const gsap = (window as any).__gsap;
-    const ScrollTrigger = (window as any).__ScrollTrigger;
-
-    // Hero entrance — subtle slide-up from current position
-    gsap.from('.hero-title', { opacity: 0, y: 40, duration: 0.8, ease: 'power3.out', delay: 0.1 });
-    gsap.from('.hero-subtitle', { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out', delay: 0.3 });
-    gsap.from('.hero-image', { opacity: 0, scale: 0.95, duration: 0.9, ease: 'power2.out', delay: 0.2 });
-    gsap.from('.hero-cta', { opacity: 0, y: 15, duration: 0.6, ease: 'power2.out', delay: 0.5 });
-
-    // Credentials strip — scroll-triggered
-    ScrollTrigger.batch('.credential-item', {
-      onEnter: (batch: any) =>
-        gsap.from(batch, { opacity: 0, y: 25, duration: 0.5, stagger: 0.08, ease: 'power2.out' }),
-      start: 'top 85%',
-      once: true
-    });
-
-    // Bio sections — scroll-triggered
-    ScrollTrigger.batch('.bio-card', {
-      onEnter: (batch: any) =>
-        gsap.from(batch, { opacity: 0, y: 40, duration: 0.6, stagger: 0.15, ease: 'power2.out' }),
-      start: 'top 85%',
-      once: true
-    });
-
-    // CTA section
-    gsap.from('.cta-section', {
-      opacity: 0,
-      y: 30,
-      duration: 0.7,
-      ease: 'power2.out',
-      scrollTrigger: { trigger: '.cta-section', start: 'top 85%', once: true }
-    });
-  });
 
   // Credentials data
   const credentials = [
@@ -104,7 +59,7 @@
   <div class="relative max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
     <!-- Text Content -->
     <div class="order-2 lg:order-1">
-      <div class="hero-title">
+      <div class="hero-title fade-in-up">
         <p class="text-teal-400 font-semibold text-sm tracking-wider uppercase mb-4">
           Advanced Bone &amp; Joint
         </p>
@@ -115,12 +70,12 @@
         </h1>
       </div>
 
-      <p class="hero-subtitle text-slate-400 text-lg leading-relaxed mb-8 max-w-xl">
+      <p class="hero-subtitle fade-in-up text-slate-400 text-lg leading-relaxed mb-8 max-w-xl" style="animation-delay: 0.15s">
         Board-Eligible and Fellowship-Trained Sports Medicine Orthopedic Surgeon
         in St.&nbsp;Peters, O'Fallon, and Wentzville, MO
       </p>
 
-      <div class="hero-cta flex flex-wrap gap-4">
+      <div class="hero-cta fade-in-up flex flex-wrap gap-4" style="animation-delay: 0.3s">
         <a
           href={bookingUrl}
           target="_blank"
@@ -146,7 +101,7 @@
 
     <!-- Hero Image / Intro Video -->
     <div class="order-1 lg:order-2 flex justify-center">
-      <div class="hero-image relative">
+      <div class="hero-image fade-in-up relative" style="animation-delay: 0.1s">
         <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 to-teal-500/5 blur-xl scale-105"></div>
         <div class="image-card relative w-72 sm:w-80 lg:w-96 aspect-[3/4] rounded-3xl">
           <!-- Layer 1 (bottom): Headshot — always fully visible, just covered by layers above -->
@@ -187,10 +142,11 @@
 <section class="credentials-section py-12 border-y border-slate-800/50" style="background: #131c31;">
   <div class="max-w-6xl mx-auto px-6">
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-      {#each credentials as cred}
+      {#each credentials as cred, i}
         <div
-          class="credential-item flex flex-col items-center text-center p-4 rounded-2xl
+          class="credential-item fade-in-up flex flex-col items-center text-center p-4 rounded-2xl
                  hover:bg-slate-800/50 transition-all duration-300 group"
+          style="animation-delay: {0.1 + i * 0.06}s"
         >
           <div class="w-12 h-12 rounded-xl bg-teal-500/10 flex items-center justify-center mb-3
                       group-hover:bg-teal-500/20 transition-colors duration-300">
@@ -209,7 +165,7 @@
      ============================================ -->
 <section class="py-20">
   <div class="max-w-4xl mx-auto px-6 space-y-12">
-    <div class="bio-card">
+    <div class="bio-card fade-in-up">
       <h2 class="text-3xl font-bold font-heading text-slate-100 mb-6">
         Meet <span class="text-gradient">Dr. McLaughlin</span>
       </h2>
@@ -222,7 +178,7 @@
       </p>
     </div>
 
-    <div class="bio-card grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+    <div class="bio-card fade-in-up grid grid-cols-1 md:grid-cols-5 gap-8 items-center" style="animation-delay: 0.1s">
       <div class="md:col-span-3">
         <h3 class="text-xl font-bold text-slate-100 mb-4">From Athlete to Surgeon</h3>
         <p class="text-slate-400 leading-relaxed">
@@ -243,7 +199,7 @@
       </div>
     </div>
 
-    <div class="bio-card glass-card rounded-2xl p-8">
+    <div class="bio-card fade-in-up glass-card rounded-2xl p-8" style="animation-delay: 0.2s">
       <h3 class="text-xl font-bold text-slate-100 mb-4">Elite Training</h3>
       <p class="text-slate-400 leading-relaxed mb-4">
         He went on to complete his orthopedic surgical residency at the prestigious Yale University,
@@ -259,7 +215,7 @@
       </p>
     </div>
 
-    <div class="bio-card grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+    <div class="bio-card fade-in-up grid grid-cols-1 md:grid-cols-5 gap-8 items-center" style="animation-delay: 0.3s">
       <div class="md:col-span-2 order-2 md:order-1">
         <div class="rounded-2xl overflow-hidden"
              style="transition: transform 0.4s ease, box-shadow 0.4s ease;"
@@ -292,7 +248,7 @@
 <!-- ============================================
      CTA SECTION
      ============================================ -->
-<section class="cta-section py-20">
+<section class="cta-section fade-in-up py-20" style="animation-delay: 0.4s">
   <div class="max-w-4xl mx-auto px-6">
     <div class="glass-card rounded-3xl p-10 sm:p-14 text-center relative overflow-hidden">
       <div class="absolute top-0 right-0 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl"></div>

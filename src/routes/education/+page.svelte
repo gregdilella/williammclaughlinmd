@@ -1,31 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { educationTopics } from '$lib/data/education';
   import { Bone, Activity, Replace, Stethoscope, Shield, ArrowRight } from 'lucide-svelte';
 
   const iconMap: Record<string, any> = { Bone, Activity, Replace, Stethoscope, Shield };
-
-  onMount(async () => {
-    await new Promise<void>((resolve) => {
-      const check = () => {
-        if ((window as any).__gsap) resolve();
-        else setTimeout(check, 50);
-      };
-      check();
-    });
-
-    const gsap = (window as any).__gsap;
-    const ScrollTrigger = (window as any).__ScrollTrigger;
-
-    gsap.from('.edu-header', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out', delay: 0.1 });
-
-    ScrollTrigger.batch('.edu-card', {
-      onEnter: (batch: any) =>
-        gsap.from(batch, { opacity: 0, y: 30, duration: 0.4, stagger: 0.1, ease: 'power2.out' }),
-      start: 'top 85%',
-      once: true
-    });
-  });
 </script>
 
 <svelte:head>
@@ -34,7 +11,7 @@
 
 <section class="pt-20 pb-12">
   <div class="max-w-4xl mx-auto px-6">
-    <div class="edu-header">
+    <div class="fade-in-up">
       <p class="text-teal-400 font-semibold text-sm tracking-wider uppercase mb-3">Education</p>
       <h1 class="text-4xl sm:text-5xl font-extrabold font-heading text-slate-100 mb-4">
         Patient <span class="text-gradient">Education</span>
@@ -52,11 +29,12 @@
 <section class="py-12">
   <div class="max-w-4xl mx-auto px-6">
     <div class="edu-grid grid grid-cols-1 sm:grid-cols-2 gap-5">
-      {#each educationTopics as topic}
+      {#each educationTopics as topic, i}
         {@const Icon = iconMap[topic.icon]}
         <a
           href="/education/{topic.slug}"
-          class="edu-card glass-card rounded-2xl p-6 group hover:border-teal-500/30 transition-all duration-300 flex flex-col"
+          class="edu-card glass-card rounded-2xl p-6 group hover:border-teal-500/30 transition-all duration-300 flex flex-col fade-in-up"
+          style="animation-delay: {0.1 + i * 0.08}s"
         >
           <div class="w-14 h-14 rounded-xl bg-teal-500/10 flex items-center justify-center mb-5 group-hover:bg-teal-500/20 transition-colors duration-300">
             {#if Icon}<Icon size={28} class="text-teal-400" />{/if}

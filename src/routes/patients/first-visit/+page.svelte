@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { bookingUrl, phoneNumber } from '$lib/data/navigation';
   import {
     Heart,
@@ -16,38 +15,6 @@
     Phone,
     Check
   } from 'lucide-svelte';
-
-  onMount(async () => {
-    await new Promise<void>((resolve) => {
-      const check = () => {
-        if ((window as any).__gsap) resolve();
-        else setTimeout(check, 50);
-      };
-      check();
-    });
-
-    const gsap = (window as any).__gsap;
-    const ScrollTrigger = (window as any).__ScrollTrigger;
-
-    // Header
-    gsap.from('.patients-header', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out', delay: 0.1 });
-
-    // Checklist items
-    ScrollTrigger.batch('.checklist-item', {
-      onEnter: (batch: any) =>
-        gsap.from(batch, { opacity: 0, x: -20, duration: 0.4, stagger: 0.08, ease: 'power2.out' }),
-      start: 'top 85%',
-      once: true
-    });
-
-    // Approach cards
-    ScrollTrigger.batch('.approach-card', {
-      onEnter: (batch: any) =>
-        gsap.from(batch, { opacity: 0, y: 25, duration: 0.4, stagger: 0.08, ease: 'power2.out' }),
-      start: 'top 85%',
-      once: true
-    });
-  });
 
   const checklist = [
     { icon: CreditCard, title: "Driver's License or Valid Photo ID", description: 'A government-issued photo ID is required for check-in.' },
@@ -74,7 +41,7 @@
 <!-- HEADER -->
 <section class="pt-20 pb-12">
   <div class="max-w-4xl mx-auto px-6">
-    <div class="patients-header">
+    <div class="fade-in-up">
       <p class="text-teal-400 font-semibold text-sm tracking-wider uppercase mb-3">Patients</p>
       <h1 class="text-4xl sm:text-5xl font-extrabold font-heading text-slate-100 mb-4">
         Your First <span class="text-gradient">Visit</span>
@@ -99,8 +66,8 @@
   <div class="max-w-4xl mx-auto px-6">
     <h2 class="text-2xl font-bold font-heading text-slate-100 mb-8">What to Bring to Your Visit</h2>
     <div class="space-y-4">
-      {#each checklist as item}
-        <div class="checklist-item glass-card rounded-xl p-5 flex items-start gap-4 hover:border-teal-500/30 transition-all duration-300 group">
+      {#each checklist as item, i}
+        <div class="checklist-item glass-card rounded-xl p-5 flex items-start gap-4 hover:border-teal-500/30 transition-all duration-300 group fade-in-up" style="animation-delay: {0.1 + i * 0.06}s">
           <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-teal-500/10 flex items-center justify-center group-hover:bg-teal-500/20 transition-colors duration-300">
             <item.icon size={20} class="text-teal-400" />
           </div>
@@ -123,8 +90,8 @@
     <h2 class="text-2xl font-bold font-heading text-slate-100 mb-3">Our Approach to Care</h2>
     <p class="text-slate-400 mb-10 max-w-xl">We are committed to providing an exceptional patient experience at every step.</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {#each approach as card}
-        <div class="approach-card glass-card rounded-2xl p-6 hover:border-teal-500/30 transition-all duration-300 group">
+      {#each approach as card, i}
+        <div class="approach-card glass-card rounded-2xl p-6 hover:border-teal-500/30 transition-all duration-300 group fade-in-up" style="animation-delay: {0.5 + i * 0.06}s">
           <div class="w-12 h-12 rounded-xl bg-teal-500/10 flex items-center justify-center mb-4 group-hover:bg-teal-500/20 transition-colors duration-300">
             <card.icon size={24} class="text-teal-400" />
           </div>

@@ -1,44 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { Award, GraduationCap, Stethoscope, BookOpen, Trophy, Heart } from 'lucide-svelte';
-
-  onMount(async () => {
-    await new Promise<void>((resolve) => {
-      const check = () => {
-        if ((window as any).__gsap) resolve();
-        else setTimeout(check, 50);
-      };
-      check();
-    });
-
-    const gsap = (window as any).__gsap;
-    const ScrollTrigger = (window as any).__ScrollTrigger;
-
-    // Header entrance
-    gsap.from('.about-header', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out', delay: 0.1 });
-    gsap.from('.about-profile-img', { opacity: 0, scale: 0.92, duration: 0.8, ease: 'power2.out', delay: 0.2 });
-
-    // Timeline items
-    gsap.utils.toArray('.timeline-item').forEach((item: any, i: number) => {
-      gsap.from(item, {
-        opacity: 0,
-        x: i % 2 === 0 ? -30 : 30,
-        duration: 0.6,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: item, start: 'top 85%', once: true }
-      });
-    });
-
-    // Quote
-    gsap.from('.philosophy-quote', {
-      opacity: 0,
-      y: 30,
-      duration: 0.7,
-      ease: 'power2.out',
-      scrollTrigger: { trigger: '.philosophy-quote', start: 'top 85%', once: true }
-    });
-
-  });
 
   const timeline = [
     {
@@ -96,7 +57,7 @@
 <!-- HEADER -->
 <section class="pt-20 pb-12">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="about-header grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+    <div class="about-header fade-in-up grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
       <div class="lg:col-span-1 flex justify-center">
         <div class="about-profile-img relative">
           <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 to-teal-500/5 blur-xl scale-110"></div>
@@ -166,7 +127,7 @@
       <div class="absolute left-8 lg:left-1/2 top-0 bottom-0 w-px bg-slate-700/50 -translate-x-1/2"></div>
       <div class="space-y-16">
         {#each timeline as item, i}
-          <div class="timeline-item relative grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="timeline-item fade-in-up relative grid grid-cols-1 lg:grid-cols-2 gap-8" style="animation-delay: {0.1 + i * 0.1}s">
             <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-teal-500 border-4 border-slate-900 z-10 top-2"></div>
             <div class="pl-20 lg:pl-0 {i % 2 === 0 ? 'lg:pr-12 lg:text-right' : 'lg:col-start-2 lg:pl-12'}">
               <div class="flex items-center gap-2 mb-2 {i % 2 === 0 ? 'lg:justify-end' : ''}">
@@ -200,7 +161,7 @@
 <!-- PHILOSOPHY -->
 <section class="py-16">
   <div class="max-w-4xl mx-auto px-6">
-    <div class="philosophy-quote glass-card rounded-3xl p-10 sm:p-14 relative overflow-hidden">
+    <div class="philosophy-quote fade-in-up glass-card rounded-3xl p-10 sm:p-14 relative overflow-hidden" style="animation-delay: 0.2s">
       <div class="absolute top-0 left-0 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl"></div>
       <div class="relative">
         <Heart size={32} class="text-teal-400 mb-6" />

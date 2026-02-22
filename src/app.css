@@ -132,22 +132,19 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 2px;
 }
 
-/* Animation helpers - elements start hidden, GSAP reveals them */
-.gsap-fade-up {
-  opacity: 0;
-  transform: translateY(40px);
+/* Simple CSS fade-in animation — no JS dependencies */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.gsap-fade-in {
-  opacity: 0;
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out both;
 }
 
-.gsap-slide-left {
-  opacity: 0;
-  transform: translateX(-40px);
-}
-
-.gsap-slide-right {
-  opacity: 0;
-  transform: translateX(40px);
-}
